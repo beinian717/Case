@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: #fff;
+}
+
+.container {
+    width: 60%;
+    /* 直接加在父元素中即可对所有块级元素的子元素进行首行缩进 */
+    text-indent: 20px;
+    line-height: 2;
+    font-size: 18px;
+    margin: 30px auto;
+    position: relative;
+}
+
+.eraser {
+    position: absolute;
+    /* top: 0; 也可以这样写*/
+    inset: 0;
+    /*
+        这里解释一下inset属性 inset属性用作定位元素的top right bottom left这些属性的简写 依照的也是上有下左的顺序 
+    */
+}
+
+.text {
+    --p: 0%;
+    /* 加上30px显示一个默认的渐变区域 */
+    background: linear-gradient(to right, #0000 var(--p), #000 calc(var(--p) + 30px));
+    color: transparent;
+    animation: erase 8s linear forwards;
+}
+
+@property --p {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
+@keyframes erase {
+    to {
+        --p: 100%;
+    }
+}
